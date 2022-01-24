@@ -2,28 +2,33 @@ version: "2"
 
 services:
     nginx:
-        build: ./images/nginx
+        restart: unless-stopped
+        container_name: ${PROJECT_NAME}_nginx
+        build: ./nginx
         ports: 
             - "80:80"
-            - "443:443"
         volumes:
-            - ./hosts:/etc/nginx/conf.d
-            - ./www:/var/www
-        links:
-            - php
+            - ./nginx/conf:/etc/nginx/conf.d
+            - ${PROJECTS_PATH}:/var/www
 
-    php:
-        build: ./images/php
-        ports:
-            - "8000:8000"
+    php-fpm:
+        restart: unless-stopped
+        container_name: ${PROJECT_NAME}_php-fpm
+        build: ./php-fpm
         volumes:
-           - ./www:/var/www
+           - ${PROJECTS_PATH}:/var/www
 
     mysql:
-        image: mysql:5.7
+        restart: unless-stopped
+        container_name: ${PROJECT_NAME}_mysql
+        platform: linux/x86_64
+        build: ./mysql
         ports:
             - "3306:3306"
         environment:
-            MYSQL_ROOT_PASSWORD: root
+            MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+            MYSQL_USER: ${MYSQL_USER}
+            MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+            MYSQL_DATABASE: ${MYSQL_DATABASE}
         volumes:
-            - ./mysql:/var/lib/mysql
+            - ./database/mysql:/var/lib/mysql
