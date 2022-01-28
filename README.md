@@ -9,6 +9,7 @@ Docker build for web projects.
 - `xdebug 2.9.1`
 - `node 16.13.2`
 - `npm 7.24.2`
+- `composer:latest`
 
 ### Environment variables:
 - `PROJECTS_PATH` full path to your project

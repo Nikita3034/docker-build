@@ -1,0 +1,41 @@
+[client]
+default-character-set=utf8
+
+[mysql]
+default-character-set=utf8
+# sql-mode="STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION"
+
+[mysqld]
+init_connect='SET collation_connection = utf8_unicode_ci' 
+init_connect='SET NAMES utf8' 
+character-set-server=utf8 
+collation-server=utf8_unicode_ci 
+skip-character-set-client-handshake
+
+[mysqld]
+skip-external-locking
+
+max_allowed_packet          = 2560M
+key_buffer_size             = 3200M
+sort_buffer_size            = 3200M
+innodb_buffer_pool_size     = 4096M
+innodb_file_per_table       = 1
+innodb_flush_method         = O_DIRECT
+innodb_flush_log_at_trx_commit  = 0
+
+max_connections             = 1000
+wait_timeout                = 960
+interactive_timeout         = 960
+
+query_cache_size            = 0
+
+slow_query_log              = /var/log/mysql/mysql-slow.log
+long_query_time             = 1
+
+expire_logs_days            = 10
+max_binlog_size             = 4500M
+
+[mysqldump]
+quick
+quote-names
+max_allowed_packet          = 4500M
