@@ -1,7 +1,3 @@
-## docker
-
-Docker build for web projects.
-
 ### Includes:
 - `nginx 1.19`
 - `mysql 5.7`
