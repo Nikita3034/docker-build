@@ -32,3 +32,4 @@ services:
             MYSQL_DATABASE: ${MYSQL_DATABASE}
         volumes:
             - ./database/mysql:/var/lib/mysql
+            - ./database/dump:/dump
