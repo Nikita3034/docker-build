@@ -1,2 +1,4 @@
 .env
-/database/*
+database/mysql
+database/dump/*
+.DS_Store
