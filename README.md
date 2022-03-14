@@ -20,3 +20,7 @@
 - `cp .env.example .env`
 - Setting the full path to the project in `.env`
 - `docker-compose up -d`
+
+### For import existing database:
+- Move your dump to folder `/dump`
+- Run command for import in container with mysql (like `mysql -u root -p your_database_name < your_database_dump.sql`)
