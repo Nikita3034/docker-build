@@ -1,5 +1,5 @@
 # stop containers
-docker-compose stop
+docker compose stop
 
 # start with build containers
-docker-compose up --build -d
+docker compose up --build -d

@@ -1,3 +1,3 @@
-FROM nginx:1.19
+FROM nginx:1.23.3
 
 WORKDIR /var/www

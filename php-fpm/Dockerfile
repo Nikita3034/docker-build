@@ -1,4 +1,4 @@
-FROM php:7.4-fpm
+FROM php:8.2-fpm
 
 # Install dependencies
 RUN apt-get update && apt-get install -y \
@@ -16,6 +16,7 @@ RUN apt-get update && apt-get install -y \
     libzip-dev \
     zlib1g-dev \
     libicu-dev \
+    libpq-dev \
     g++ \
     sudo \
     libz-dev \
@@ -26,7 +27,7 @@ RUN apt-get update && apt-get install -y \
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install extensions
-RUN docker-php-ext-install pdo_mysql zip exif pcntl bcmath mysqli
+RUN docker-php-ext-install pdo pdo_pgsql
 RUN docker-php-ext-configure gd --with-jpeg --with-freetype
 RUN docker-php-ext-configure intl
 RUN docker-php-ext-install gd intl
@@ -36,17 +37,8 @@ RUN docker-php-ext-install opcache
 RUN curl -sS https://getcomposer.org/installer | php -- \ 
     --install-dir=/usr/local/bin --filename=composer && chmod +x /usr/local/bin/composer
 
-# Install xdebug
-RUN pecl install xdebug-2.9.1 \
-    && docker-php-ext-enable xdebug
-COPY xdebug.ini $PHP_INI_DIR/conf.d/xdebug.ini
-
-# Install node and npm
-RUN curl -sL https://deb.nodesource.com/setup_16.x -o setup_16.sh
-RUN sh ./setup_16.sh
-RUN apt update
-RUN apt install nodejs
-RUN npm i -g npm@7.24.2
+# Install xdebug by pecl
+RUN pecl install xdebug && docker-php-ext-enable xdebug
 
 # Add user www
 RUN groupadd -g 1000 www
