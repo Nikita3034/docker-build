@@ -23,6 +23,10 @@ RUN apt-get update && apt-get install -y \
     libmemcached-dev \
     sendmail 
 
+# Install nodejs
+RUN curl -sL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+RUN apt-get install -y nodejs
+
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
