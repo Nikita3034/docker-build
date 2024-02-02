@@ -1,5 +1,6 @@
 .env
 database/mysql
+database/data
 database/dump/*
 !database/dump/README.md
 .DS_Store
