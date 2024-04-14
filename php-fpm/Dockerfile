@@ -32,6 +32,7 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install extensions
 RUN docker-php-ext-install pdo pdo_pgsql
+RUN docker-php-ext-install mysqli
 RUN docker-php-ext-configure gd --with-jpeg --with-freetype
 RUN docker-php-ext-configure intl
 RUN docker-php-ext-install gd intl
